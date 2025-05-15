@@ -11,7 +11,7 @@ public class Pedido {
 
     private  Pessoa cliente;
     private String tipoEntrega;
-    private Pagamento pagamento;
+    private Pagamento pagamento; // Strategy
     private String status;
     private  List<PedidoObserver> observadores = new ArrayList<>();
     private List<ItemPedido> itens = new ArrayList<>();
@@ -31,11 +31,11 @@ public class Pedido {
 
     public void setFormaPagamento(Pagamento pagamento) {
         this.pagamento = pagamento;
-    }
+    } // Strategy
 
     public void realizarPagamento() {
         if (pagamento != null) {
-            pagamento.pagar(calcularTotal());
+            pagamento.pagar(calcularTotal()); // Strategy
         } else {
             System.out.println("Forma de pagamento não definida.");
         }

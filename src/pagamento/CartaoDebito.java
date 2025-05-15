@@ -1,5 +1,5 @@
 package pagamento;
-
+// Padrão Strategy
 public class CartaoDebito implements Pagamento{
     @Override
     public void pagar(double valor) {

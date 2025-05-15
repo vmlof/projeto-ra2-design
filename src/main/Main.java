@@ -1,5 +1,5 @@
 package main;
-
+/**
 import cardapio.ItemCardapio;
 import cardapio.ItemCardapioFactory;
 import pagamento.Pix;
@@ -65,4 +65,4 @@ public class Main {
         System.out.println("Processando pagamento:");
         pedido.realizarPagamento();
     }
-}
+}**/
