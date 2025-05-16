@@ -1,18 +1,17 @@
 package cardapio;
 
+import java.util.List;
+
 public class BebidaFactory extends ItemCardapioFactory {
     @Override
-    public ItemCardapio criarItem(String tipo, String tamanho) {
+    public ItemCardapio criarItem(String tipo, String tamanho, List<String> adicionais) {
         switch (tipo.toLowerCase()) {
-            case "refrigerante":
-                return new Bebida("Refrigerante", calcularPreco(tamanho, 1.0), tamanho);
-            case "suco de laranja":
-                return new Bebida("Suco de Laranja", calcularPreco(tamanho, 2.0), tamanho);
-            case "água mineral":
-                return new Bebida("Água Mineral", calcularPreco(tamanho, 0.0), tamanho);
-            default:
-                throw new IllegalArgumentException("Tipo de bebida desconhecido: " + tipo);
-        }
+            case "refrigerante" -> new Bebida("Refrigerante", calcularPreco(tamanho, 1.0), tamanho);
+            case "suco de laranja" -> new Bebida("Suco de Laranja", calcularPreco(tamanho, 2.0), tamanho);
+            case "água mineral" -> new Bebida("Água Mineral", calcularPreco(tamanho, 0.0), tamanho);
+            default -> throw new IllegalArgumentException("Tipo de bebida desconhecido: " + tipo);
+        };
+        return null;
     }
 
     private double calcularPreco(String tamanho, double adicionalTipo) {

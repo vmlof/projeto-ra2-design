@@ -16,13 +16,13 @@ public class Cardapio {
         ItemCardapioFactory pizzaFactory = new PizzaFactory();
         ItemCardapioFactory bebidaFactory = new BebidaFactory();
 
-        itens.add(pizzaFactory.criarItem("margherita", "média"));
-        itens.add(pizzaFactory.criarItem("calabresa", "grande"));
-        itens.add(pizzaFactory.criarItem("quatro queijos", "pequena"));
+        itens.add(pizzaFactory.criarItem("margherita", "média", null));
+        itens.add(pizzaFactory.criarItem("calabresa", "grande", null));
+        itens.add(pizzaFactory.criarItem("quatro queijos", "pequena", null));
 
-        itens.add(bebidaFactory.criarItem("refrigerante", "250ml"));
-        itens.add(bebidaFactory.criarItem("suco de laranja", "1l"));
-        itens.add(bebidaFactory.criarItem("água mineral", "800ml"));
+        itens.add(bebidaFactory.criarItem("refrigerante", "250ml",null));
+        itens.add(bebidaFactory.criarItem("suco de laranja", "1l",null));
+        itens.add(bebidaFactory.criarItem("água mineral", "800ml",null));
     }
 
     public void exibirCardapio() {

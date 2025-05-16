@@ -1,27 +1,36 @@
 package cardapio;
 
+import java.util.List;
+
 public class PizzaFactory extends ItemCardapioFactory {
     @Override
-    public ItemCardapio criarItem(String tipo, String tamanho) {
-        switch (tipo.toLowerCase()) {
-            case "margherita":
-                return new Pizza("Margherita", calcularPreco(tamanho, 5.0), tamanho);
-            case "pepperoni":
-                return new Pizza("Pepperoni", calcularPreco(tamanho, 1.0), tamanho);
-            case "vegetariana":
-                return new Pizza("Vegetariana", calcularPreco(tamanho, 0.0), tamanho);
-            default:
-                throw new IllegalArgumentException("Tipo de pizza desconhecido: " + tipo);
+    public ItemCardapio criarItem(String tipo, String tamanho, List<String> adicionais) {
+        ItemCardapio pizza = criarPizzaBase(tipo, tamanho);
+
+        if(adicionais != null) {
+            for(String adicional : adicionais) {
+                pizza = aplicarAdicional(pizza, adicional);
+            }
         }
+        return pizza;
     }
 
-    private double calcularPreco(String tamanho, double adicionalTipo) {
+    private ItemCardapio criarPizzaBase(String tipo, String tamanho) {
         double precoBase = switch (tamanho.toLowerCase()) {
             case "pequena" -> 25.0;
             case "media" -> 35.0;
-            case "grande" -> 50.0;
+            case "grande" -> 45.0;
             default -> 30.0;
         };
-        return precoBase + adicionalTipo;
+        return new Pizza(tipo,precoBase,tamanho);
     }
+    // Padrão Decorator
+    private ItemCardapio aplicarAdicional(ItemCardapio pizza, String adicional) {
+        return switch (adicional.toLowerCase()) {
+            case "queijo extra" -> new QueijoExtra(pizza);
+            case "borda recheada" -> new BordaRecheada(pizza);
+            default -> pizza;
+        };
+    }
+
 }

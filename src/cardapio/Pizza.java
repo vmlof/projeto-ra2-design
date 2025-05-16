@@ -13,7 +13,7 @@ public class Pizza implements ItemCardapio {
 
     @Override
     public String getNome() {
-        return nome;
+        return nome + " (" + tamanho + ")";
     }
 
     @Override

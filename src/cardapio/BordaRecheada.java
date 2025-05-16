@@ -1,17 +1,22 @@
 package cardapio;
-
-public class BordaRecheada extends AdicionalDecorator {
+// Padrão Decorator
+public class BordaRecheada extends PizzaDecorator {
     public BordaRecheada(ItemCardapio pizza) {
         super(pizza);
     }
 
     @Override
     public double getPreco() {
-        return pizza.getPreco() + 4.5;
+        return pizzaDecorada.getPreco() + 5.0;
     }
 
     @Override
     public String getDescricao() {
-        return pizza.getDescricao() + ", com borda recheada";
+        return pizzaDecorada.getDescricao() + " + Borda Recheada";
+    }
+
+    @Override
+    public String getNome() {
+        return pizzaDecorada.getNome() + " c/ Borda Recheada";
     }
 }

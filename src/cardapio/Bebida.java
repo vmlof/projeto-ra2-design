@@ -2,8 +2,8 @@ package cardapio;
 
 public class Bebida implements ItemCardapio {
     private final String nome;
-    private final String ml;
     private final double preco;
+    private final String ml;
 
     public Bebida(String nome, double preco, String ml) {
         this.nome = nome;
