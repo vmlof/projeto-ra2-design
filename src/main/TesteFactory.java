@@ -9,18 +9,19 @@ import java.util.List;
 
 public class TesteFactory {
     public static void main(String[] args) {
-        ItemCardapioFactory factory;
+        ItemCardapioFactory pizzaFactory = new PizzaFactory();
 
-        // Criar pizza
-        factory = new PizzaFactory();
-        ItemCardapio pizza = factory.criarItem("Calabresa", 30.0, "Grande", List.of("queijo extra", "borda recheada"));
+        // Criando pizzas com preços diferentes por tipo
+        ItemCardapio margherita = pizzaFactory.criarItem("margherita", "media");
+        ItemCardapio pepperoni = pizzaFactory.criarItem("pepperoni", "media");
+        ItemCardapio vegetariana = pizzaFactory.criarItem("vegetariana", "media");
 
-        // Criar bebida
-        factory = new BebidaFactory();
-        ItemCardapio bebida = factory.criarItem("Coca-Cola", 8.0, "Lata", null);
+        System.out.println("Margherita (média): R$" + margherita.getPreco()); // 35 + 5 = 40
+        System.out.println("Pepperoni (média): R$" + pepperoni.getPreco());    // 35 + 1 = 36
+        System.out.println("Vegetariana (média): R$" + vegetariana.getPreco());// 35 + 0 = 35
 
-        System.out.println("Pedido:");
-        System.out.println(pizza.getNome() + " - R$" + pizza.getPreco());
-        System.out.println(bebida.getNome() + " - R$" + bebida.getPreco());
+        // Mostrando com tamanho grande
+        ItemCardapio margheritaGrande = pizzaFactory.criarItem("margherita", "grande");
+        System.out.println("Margherita (grande): R$" + margheritaGrande.getPreco()); // 45 + 5 = 50
     }
 }
