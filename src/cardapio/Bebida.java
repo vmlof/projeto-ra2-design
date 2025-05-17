@@ -23,6 +23,6 @@ public class Bebida implements ItemCardapio {
 
     @Override
     public String getDescricao() {
-        return "Bebida " + nome + ", tamanho " + ml;
+        return  nome + ", tamanho " + ml;
     }
 }

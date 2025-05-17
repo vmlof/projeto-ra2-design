@@ -9,21 +9,28 @@ import java.util.List;
 
 public class Pedido {
 
-    private  Pessoa cliente;
-    private String tipoEntrega;
+    private  final Pessoa cliente;
+    private final String tipoEntrega;
+    private final List<ItemPedido> itens;
     private Pagamento pagamento; // Strategy
     private String status;
     private  List<PedidoObserver> observadores = new ArrayList<>();
-    private List<ItemPedido> itens = new ArrayList<>();
 
     public Pedido(PedidoBuilder builder) {
         this.cliente = builder.getCliente();
         this.tipoEntrega = builder.getTipoEntrega();
         this.pagamento = builder.getPagamento();
-        this.status = builder.getStatus();
-        this.itens = builder.getItens();
+        this.status = builder.getStatus() != null ? builder.getStatus() : "Recebido";
+        this.itens = new ArrayList<>(builder.getItens());
     }
 
+    public int getQuantidadeTotalItens() {
+        int total = 0;
+        for (ItemPedido item : itens) {
+            total += item.getQuantidade();
+        }
+        return total;
+    }
 
     public void adicionarItem(ItemCardapio item, int quantidade) {
         itens.add(new ItemPedido(item, quantidade));
@@ -77,16 +84,20 @@ public class Pedido {
 
     public void exibir() {
         System.out.println("Cliente: " + cliente.getNome() + " (" + cliente.getCpf() + ")");
-        System.out.println("Contato: " + cliente.getTelefone() + ", " + cliente.getEmail());
+        System.out.println("Contato: " + cliente.getEmail() + ", " + cliente.getTelefone());
         System.out.println("Endereço: " + cliente.getEndereco());
         System.out.println("Entrega: " + tipoEntrega);
         System.out.println("Itens:");
 
-        for (ItemPedido ip : itens) {
-            System.out.println(ip);
+        if (itens.isEmpty()) {
+            System.out.println("  Nenhum item no pedido");
+        } else {
+            for (ItemPedido ip : itens) {
+                System.out.println("  " + ip.toString());
+            }
         }
-
         System.out.printf("Total: R$%.2f%n", calcularTotal());
+        System.out.println("Status: " + status);
         System.out.println("Pagamento: " + (pagamento != null ? pagamento.getClass().getSimpleName() : "Não definido"));
     }
 }

@@ -7,6 +7,9 @@ public class ItemPedido {
     private int quantidade;
 
     public ItemPedido(ItemCardapio item, int quantidade) {
+        if (item == null) throw new IllegalArgumentException("Item do cardápio não pode ser nulo");
+        if (quantidade <= 0) throw new IllegalArgumentException("Quantidade deve ser positiva");
+
         this.item = item;
         this.quantidade = quantidade;
     }
@@ -29,6 +32,6 @@ public class ItemPedido {
 
     @Override
     public String toString() {
-        return "- " + item.getNome() + " (" + "x" + quantidade + "): R$ " + item.getPreco();
+        return String.format("%dx %s - R$%.2f", quantidade, item.getDescricao(), getSubtotal());
     }
 }
