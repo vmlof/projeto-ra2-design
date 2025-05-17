@@ -32,6 +32,8 @@ public class Pedido {
         return total;
     }
 
+    public Pessoa getCliente() {return cliente;}
+
     public void adicionarItem(ItemCardapio item, int quantidade) {
         itens.add(new ItemPedido(item, quantidade));
     }
