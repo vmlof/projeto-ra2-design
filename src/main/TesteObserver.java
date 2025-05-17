@@ -4,10 +4,12 @@ import cardapio.BebidaFactory;
 import cardapio.ItemCardapio;
 import cardapio.PizzaFactory;
 import pagamento.CartaoCredito;
+import pedido.CozinhaObservador;
 import pedido.Pedido;
 import pedido.PedidoBuilder;
 import pessoas.Cliente;
 import pessoas.ClienteObservador;
+import pessoas.EntregadorObservador;
 
 public class TesteObserver {
     public static void main(String[] args) {
@@ -18,8 +20,6 @@ public class TesteObserver {
         Cliente cliente = new Cliente("João Silva", "123.456.789-00",
                 "(11) 99999-9999", "joao@email.com", "Rua Exemplo, 123");
 
-        // Cliente também será observador
-        ClienteObservador clienteObservador = new ClienteObservador(cliente.getNome());
 
         // Itens
         ItemCardapio pizza = pizzaFactory.criarItem("pizza", "grande", null);
@@ -35,15 +35,22 @@ public class TesteObserver {
                 .adicionarItem(bebida, 2)
                 .construir();
 
-        // Registrar observador
-        pedido.adicionarObservador(clienteObservador);
+        // Observadores
+        pedido.adicionarObservador(new ClienteObservador(cliente.getNome()));
+        pedido.adicionarObservador(new CozinhaObservador());
+        pedido.adicionarObservador(new EntregadorObservador("Carlos"));
 
-        // Exibir pedido
-        pedido.exibir();
-
-        // Atualizar status do pedido (isso aciona a notificação)
+        // Testando notificações
         pedido.atualizarStatus("Preparando");
+        System.out.println();
+
+        pedido.atualizarStatus("Pronto");
+        System.out.println();
+
         pedido.atualizarStatus("Saiu para entrega");
+        System.out.println();
+
         pedido.atualizarStatus("Finalizado");
+
     }
 }
