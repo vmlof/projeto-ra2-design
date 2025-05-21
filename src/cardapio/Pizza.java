@@ -23,6 +23,6 @@ public class Pizza implements ItemCardapio {
 
     @Override
     public String getDescricao() {
-        return "Pizza " + nome + ", tamanho " + tamanho;
+        return nome + ", tamanho " + tamanho;
     }
 }

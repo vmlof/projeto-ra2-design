@@ -15,4 +15,9 @@ public class Pessoa {
     public String getEmail() {return email;}
     public String getTelefone() {return telefone;}
     public String getEndereco() {return endereco;}
+
+    @Override
+    public String toString() {
+        return nome + " " + cpf + " " + email + " " + telefone + " " + endereco;
+    }
 }
