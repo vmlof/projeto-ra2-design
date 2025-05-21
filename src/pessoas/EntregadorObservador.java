@@ -12,7 +12,7 @@ public class EntregadorObservador implements PedidoObserver {
     @Override
     public void atualizar(String status) {
         if (status.equalsIgnoreCase("Pronto") || status.equalsIgnoreCase("Saiu para entrega")) {
-            System.out.println("[Entregador: " + nome + "] Pedido está pronto para ser retirado.");
+            System.out.println("- Entregador(" + nome + "): Pedido está pronto para ser retirado.");
         }
     }
 }

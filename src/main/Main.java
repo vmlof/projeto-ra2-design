@@ -5,10 +5,13 @@ import cardapio.ItemCardapio;
 import cardapio.PizzaFactory;
 import pagamento.CartaoCredito;
 import pagamento.Pix;
+import pedido.CozinhaObservador;
 import pedido.Pedido;
 import pedido.PedidoBuilder;
 import pedido.PedidoManager;
 import pessoas.Cliente;
+import pessoas.ClienteObservador;
+import pessoas.EntregadorObservador;
 
 import java.util.List;
 
@@ -28,7 +31,7 @@ public class Main {
                 .comCliente(cliente1)
                 .comTipoEntrega("Delivery")
                 .comPagamento(new CartaoCredito()) // Strategy
-                .comStatus("Preparando")
+                .comStatus("recebido")
                 .adicionarItem(pizzaMargherita,1)
                 .adicionarItem(sucoDeLaranja,1)
                 .construir();
@@ -44,17 +47,26 @@ public class Main {
                 .comCliente(cliente2)
                 .comTipoEntrega("Retirada")
                 .comPagamento(new Pix())
-                .comStatus("Preparando")
+                .comStatus("preparando")
                 .adicionarItem(pizzaCalabresa, 1)
                 .construir();
 
+        // Observer
+        pedido1.adicionarObservador(new ClienteObservador(cliente1.getNome()));
+        pedido1.adicionarObservador(new CozinhaObservador());
 
-        // adicionando pedidos
+        pedido2.adicionarObservador(new ClienteObservador(cliente2.getNome()));
+        pedido2.adicionarObservador(new EntregadorObservador("José"));
+        pedido2.adicionarObservador(new CozinhaObservador());
+
         pm.adicionarPedido(pedido1);
         pm.adicionarPedido(pedido2);
         pm.exibirTodosPedidos();
 
+        System.out.println("=== Atualização de status ===");
 
+        pm.atualizarStatusPedidoPorCpf("123.456.789-00","pronto");
+        pm.atualizarStatusPedidoPorCpf("987.654.321-00","pronto");
 
     }
 }

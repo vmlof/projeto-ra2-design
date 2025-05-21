@@ -11,6 +11,6 @@ public class ClienteObservador implements PedidoObserver {
 
     @Override
     public void atualizar(String status) {
-        System.out.println("[Cliente: " + nome + "] Pedido agora está: " + status);
+        System.out.println("- Cliente: " + nome + "\n- Pedido agora está: " + status);
     }
 }
